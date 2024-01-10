@@ -2,9 +2,15 @@
 namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class EquipsController {
-    private $equips = array(
+class EquipsController extends AbstractController{
+    
+    
+    #[Route('/equip/{codi?1}', name:'dades_equips', requirements: ['codi' => '\d+'])]
+    public function equip($codi){
+
+        $equips = array(
         array(
             "codi" => "1",
             "nom" => "Equip Roig",
@@ -34,16 +40,22 @@ class EquipsController {
             "membres" => array("Sergio", "Marta", "David", "Nuria")
         )
     );
-    
-    #[Route('/equip/{codi}', name:'equip', requirements: ['codi' => '\d+'])]
-    public function equip($codi) {
 
-        foreach ($this->equips as $equip) {
-            if($equip["codi"] == $codi) {
-                return new Response("<ul><li>" . $equip["codi"] . "</li>" . "<li>" . $equip["nom"]  . "</li>" .  "<li>" . $equip["cicle"]  . "</li>" .  "<li>" . $equip["curs"]  . "</li>" .  "<li>" . $equip["membres"][0]  . "</li>" .  "<li>" . $equip["membres"][1]  . "</li>".  "<li>" . $equip["membres"][2]  . "</li>".  "<li>" . $equip["membres"][3]  . "</li>");
+
+        $equipSeleccionat = null;
+        foreach ($equips as $equip) {
+            if($equip['codi'] == $codi) {
+                $equipSeleccionat = $equip;
+                break;
             }
         }
-        return new Response("Equip no trobat");
+
+        if ($equipSeleccionat === null) {
+            $equipSeleccionat = reset($equips);
+        }
+
+        return $this->render('dades_equip.html.twig', ['equip' => $equipSeleccionat]);
+        
 
 
         

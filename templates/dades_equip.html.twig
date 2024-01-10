@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %}Dades Equips{% endblock %}
+
+{% block body %}
+{% include 'navegacion.html.twig' %}
+<section>
+<div>
+    <h1 id="titolEquip">Dades Equips</h1>
+</div>
+
+<div>
+    <p class="paragrafEquip">Proyecto Symfony</p>
+</div>
+
+<div id="container-equips">
+    <img src="{{ asset('assets/img/will_smith.jpg') }}" alt="" class="imatgeEquip">
+</div>
+<div id="info_equip">
+    {% if equip is defined %}
+        <p>codi: {{ equip.codi }}</p>
+        <p>Nom: {{ equip.nom }}</p>
+        <p>Cicle: {{ equip.cicle }}</p>
+        <p>Curs: {{ equip.curs }}</p>
+    <p>Membres:</p>
+        <ul>
+            {% for membre in equip.membres %}
+                <li>{{ membre }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>El equipo no se encontró o no es válido.</p>
+    {% endif %}
+</div>
+
+<div id="enllaç_tornar">
+    <img src="{{ asset('assets/img/inici.png') }}" alt="" class="inici">
+    <a href="{{ path('home') }}">Torna a l'inici</a>
+</div>
+</section>
+{% endblock %}

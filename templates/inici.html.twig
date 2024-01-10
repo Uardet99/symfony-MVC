@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}Projecte Symfony{% endblock %}
+
+{# {% block stylesheets %}
+{{ encore_entry_link_tags('app') }}
+<link href="{{ asset('assets/css/estilsHome.css') }}" rel="stylesheet">
+{% endblock %} #}
+
+{% block body %}
+{% include 'navegacion.html.twig' %}
+<section>
+<div>
+    <h1 id="titolInici">Projecte Symfony Equips 2n DAW</h1>
+</div>
+
+<div>
+    <p id="paragrafInici">Inici programa gestio d'equips i membres dels projecte 2n DAW, IES Lluis Simarro Curs 22/23</p>
+</div>
+
+<div id="container-img">
+    <img src="{{ asset('assets/img/Ies_Dr._Lluis_Simarro.jpg') }}" alt="" class="imatgeInici">
+</div>
+</section>
+{% endblock %}
